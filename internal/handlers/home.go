@@ -2,7 +2,7 @@ package handlers
 
 import (
     "github.com/gofiber/fiber/v2"
-    "news-scraper/internal/database"
+    "news-scraper/web/templates"
 )
 
 type HomeHandler struct {
@@ -14,7 +14,8 @@ func NewHomeHandler(repo *database.Repository) *HomeHandler {
 }
 
 func (h *HomeHandler) Index(c *fiber.Ctx) error {
-    return c.Render("home", fiber.Map{
-        "Title": "News Scraper",
-    })
+    // return c.Render("home", fiber.Map{
+    //     "Title": "News Scraper",
+    // })
+    return templates.Home().Render(c.context(), c.Response().BodyWriter())
 }

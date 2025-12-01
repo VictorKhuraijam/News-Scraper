@@ -3,6 +3,7 @@ package handlers
 import (
     "github.com/gofiber/fiber/v2"
     "news-scraper/internal/database"
+    "news-scraper/web/templates"
     "strconv"
 )
 
@@ -51,7 +52,19 @@ func (h *ArticlesHandler) RenderArticles(c *fiber.Ctx) error {
         return c.Status(500).SendString("Failed to load articles")
     }
 
-    return c.Render("articles", fiber.Map{
-        "Articles": articles,
-    })
+    // return c.Render("articles", fiber.Map{
+    //     "Articles": articles,
+    // })
+    return templates.Articles(articles).Render(c.Context(), c.Response().BodyWriter())
+}
+
+func (h *ArticlesHandler) RenderArticlesList(c *fiber.Ctx) error {
+    limit := 50
+    articles, err := h.repo.GetRecentArticles(c.Context(), limit)
+    if err != nil {
+        return c.Status(500).SendString("Failed to load articles")
+    }
+
+    // Render just the articles list component for HTMX updates
+    return templates.ArticlesList(articles).Render(c.Context(), c.Response().BodyWriter())
 }
