@@ -1,8 +1,10 @@
 package handlers
 
 import (
-    "github.com/gofiber/fiber/v2"
-    "news-scraper/internal/scraper"
+	"news-scraper/internal/scraper"
+	"news-scraper/web/templates"
+
+	"github.com/gofiber/fiber/v2"
 )
 
 type ScrapeHandler struct {
@@ -20,7 +22,11 @@ func (h *ScrapeHandler) TriggerScrape(c *fiber.Ctx) error {
         }
     }()
 
-    return c.JSON(fiber.Map{
-        "message": "Scraping started",
-    })
+    // return c.JSON(fiber.Map{
+    //     "message": "Scraping started",
+    // })
+    c.Set("Content-Type", "text/html")
+    return templates.SuccessMessage("Scraping started in background!").Render(c.Context(), c.Response().BodyWriter())
+
+
 }

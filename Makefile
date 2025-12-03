@@ -13,7 +13,7 @@ migrate:
 	mysql -u root -p news_scraper < migrations/001_init.sql
 
 clean:
-# 	rm -rf bin/
+	rm -rf bin/
 
 deps:
 	go mod download
