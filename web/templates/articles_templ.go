@@ -47,7 +47,7 @@ func Articles(articles []models.Article) templ.Component {
 				}()
 			}
 			ctx = templ.InitializeContext(ctx)
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<div class=\"px-4 py-6 sm:px-0\"><div class=\"flex justify-between items-center mb-6\"><h1 class=\"text-3xl font-bold text-gray-800\">Latest Articles</h1><div class=\"flex items-center space-x-4\"><button hx-get=\"/api/articles-list\" hx-target=\"#articles-list\" class=\"bg-gray-200 hover:bg-gray-300 text-gray-700 px-4 py-2 rounded-md\">Refresh</button> <span class=\"text-sm text-gray-500\">")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<div class=\"px-4 py-6 sm:px-0\"><div class=\"flex justify-between items-center mb-6\"><h1 class=\"text-3xl font-bold text-gray-800\">Latest Articles</h1><div class=\"flex items-center space-x-4\"><button hx-get=\"/api/articles\" hx-target=\"#articles-list\" class=\"bg-gray-200 hover:bg-gray-300 text-gray-700 px-4 py-2 rounded-md\">Refresh</button> <span class=\"text-sm text-gray-500\">")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}

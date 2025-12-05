@@ -60,6 +60,7 @@ func (h *ArticlesHandler) RenderArticles(c *fiber.Ctx) error {
     //     "Articles": articles,
     // })
     // Render full page with layout
+    c.Set("Content-Type", "text/html")
     return templates.Articles(articles).Render(c.Context(), c.Response().BodyWriter())
 }
 

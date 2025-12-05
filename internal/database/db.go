@@ -27,8 +27,6 @@ func Connect(cfg Config) (*sql.DB, error) {
         return nil, fmt.Errorf("failed to open database: %w", err)
     }
 
-    defer db.Close()
-
     //Create database
 
     _, err = db.Exec(fmt.Sprintf("CREATE DATABASE IF NOT EXISTS %s", cfg.Name))
@@ -36,7 +34,7 @@ func Connect(cfg Config) (*sql.DB, error) {
         log.Fatalf("Error in creating database: %v",err)
     }
     fmt.Printf("Database '%s' ensured to exist.\n", cfg.Name)
-    db.Close()
+
 
     //re-connect to the newly created database
 
@@ -46,7 +44,7 @@ func Connect(cfg Config) (*sql.DB, error) {
     if err != nil {
         return nil, fmt.Errorf("failed to open database: %w", err)
     }
-    defer db.Close()
+
 
     createTable(db)
 

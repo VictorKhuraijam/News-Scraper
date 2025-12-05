@@ -110,10 +110,6 @@ func (s *Scraper) ScrapeAll(ctx context.Context) error {
     }
     close(jobs)  // Signal that no more jobs are coming
 
-    // Wait for all workers to finish
-    wg.Wait()
-    close(results)
-
      // STEP 5: Wait for all workers to finish
     wg.Wait()
 
