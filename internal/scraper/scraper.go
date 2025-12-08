@@ -66,7 +66,7 @@ func (s *Scraper) ScrapeAll(ctx context.Context) error {
         return fmt.Errorf("failed to get sources: %w", err)
     }
 
-    log.Printf("Starting scrape for %d sources with %d workers", len(sources), s.workers)
+    log.Printf("Starting scraping for %d sources with %d workers", len(sources), s.workers)
 
     // STEP 2: Create channels for work distribution
     // Jobs channel: Sources to be scraped
