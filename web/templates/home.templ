@@ -16,10 +16,15 @@ templ Home() {
                     <button
                         hx-post="/api/scrape"
                         hx-indicator="#scrape-indicator"
+                        hx-target="#scrape-result"
+                        hx-swap="innerHTML"
+
                         class="bg-blue-800 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-900 transition">
                         Start Scraping
                     </button>
                 </div>
+
+
                 <div id="scrape-indicator" class="htmx-indicator mt-4">
                     <div class="flex items-center">
                         <svg class="animate-spin h-5 w-5 mr-3" viewBox="0 0 24 24">
@@ -30,6 +35,8 @@ templ Home() {
                     </div>
                 </div>
             </div>
+
+                <div id="scrape-result" class="mt-4 mb-4" hx-on::after-settle="setTimeout(() => this.innerHTML = '', 5000)"></div>
 
             <!-- Features Grid -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
