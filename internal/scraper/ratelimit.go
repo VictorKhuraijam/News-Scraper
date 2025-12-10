@@ -17,7 +17,6 @@ type RateLimiter struct {
     rate   time.Duration   // Time between token refills
 }
 
-
 // NewRateLimiter creates a rate limiter that allows requestsPerSecond
 // Example: requestsPerSecond=10 means max 10 requests per second
 func NewRateLimiter(requestsPerSecond int) *RateLimiter {

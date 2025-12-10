@@ -17,7 +17,7 @@ func NewArticlesHandler(repo *database.Repository) *ArticlesHandler {
 
 // GetRecent returns articles as JSON (for API)
 func (h *ArticlesHandler) GetRecent(c *fiber.Ctx) error {
-    limit := 50
+    limit := 100
     articles, err := h.repo.GetRecentArticles(c.Context(), limit)
     if err != nil {
         return c.Status(500).JSON(fiber.Map{
@@ -25,7 +25,9 @@ func (h *ArticlesHandler) GetRecent(c *fiber.Ctx) error {
         })
     }
 
-    return c.JSON(articles)
+    // return c.JSON(articles)
+    c.Set("Content-Type", "text/html")
+    return templates.ArticlesList(articles).Render(c.Context(), c.Response().BodyWriter())
 }
 
 // GetBySource returns articles from specific source as JSON (for API)
@@ -52,7 +54,7 @@ func (h *ArticlesHandler) GetBySource(c *fiber.Ctx) error {
 
 // RenderArticles renders the full articles page with Templ
 func (h *ArticlesHandler) RenderArticles(c *fiber.Ctx) error {
-    limit := 50
+    limit := 100
     articles, err := h.repo.GetRecentArticles(c.Context(), limit)
     if err != nil {
         return c.Status(500).SendString("Failed to load articles")
@@ -68,7 +70,7 @@ func (h *ArticlesHandler) RenderArticles(c *fiber.Ctx) error {
 
 // RenderArticlesList renders just the articles list (for HTMX partial updates)
 func (h *ArticlesHandler) RenderArticlesList(c *fiber.Ctx) error {
-    limit := 50
+    limit := 100
     articles, err := h.repo.GetRecentArticles(c.Context(), limit)
     if err != nil {
         return c.Status(500).SendString("Failed to load articles")

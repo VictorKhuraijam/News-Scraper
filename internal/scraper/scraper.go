@@ -23,7 +23,7 @@ type ScrapedArticle struct {
 // Scraper coordinates the scraping process
 // It manages workers, rate limiting, and HTTP requests
 type Scraper struct {
-    repo        *database.Repository // Database access for saving articles
+    repo        *database.Repository  // Database access for saving articles
     rateLimiter *RateLimiter          // Controls request rate
     client      *http.Client          // Reusable HTTP client
     userAgent   string                // User-Agent header value
