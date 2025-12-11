@@ -29,6 +29,6 @@ CREATE TABLE IF NOT EXISTS articles (
 INSERT INTO sources (name, url, selector_title, selector_link, selector_summary) VALUES
 ('TechCrunch', 'https://techcrunch.com', '[class*="post"] a[href*="techcrunch"]', '[class*="post"] a[href*="techcrunch"]', 'div.post-block__content'),
 ('BBC News', 'https://www.bbc.com/news', 'a[data-testid="internal-link"]', 'a[data-testid="internal-link"]', 'p.gs-c-promo-summary'),
-('The Guardian', 'https://www.theguardian.com/international', 'a[data-link-name*="article title"]', 'a[data-link-name*="article title"]', 'div[data-link-name*="article title"] p'),
-('Reuters', 'https://www.reuters.com', 'a[data-testid="Heading"]', 'a[data-testid="Heading"]', 'p[data-testid="Text"]'),
-('AP News', 'https://apnews.com', 'a[data-key="card-headline"] h2', 'a[data-key="card-headline"]', 'div[data-key="card-content"] p.Component-content-0-3-11');
+('The Guardian', 'https://www.theguardian.com/international', 'a[href*="/2025/"]', 'a[href*="/2025/"]', 'div[data-link-name*="article title"] p'),
+('Reuters', 'https://www.reuters.com', 'a[href^="/world/"]' , 'a[href^="/world/"]' , 'p[data-testid="Text"]'),
+('The Indian Express', 'https://indianexpress.com/', 'h3 a, h2 a', 'h3 a, h2 a', 'div.short-story p');
