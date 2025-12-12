@@ -5,6 +5,7 @@ CREATE TABLE IF NOT EXISTS sources (
     selector_title VARCHAR(255) NOT NULL,
     selector_link VARCHAR(255) NOT NULL,
     selector_summary VARCHAR(255),
+    default_category VARCHAR(50) DEFAULT general,
     active BOOLEAN DEFAULT TRUE,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
@@ -17,12 +18,14 @@ CREATE TABLE IF NOT EXISTS articles (
     title VARCHAR(512) NOT NULL,
     url VARCHAR(1024) NOT NULL,
     summary TEXT,
+    category VARCHAR(50) DEFAULT general,
     scraped_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (source_id) REFERENCES sources(id) ON DELETE CASCADE,
     UNIQUE KEY unique_article (url),
     INDEX idx_scraped_at (scraped_at),
-    INDEX idx_source_id (source_id)
+    INDEX idx_source_id (source_id),
+    INDEX idx_category (category)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Insert sample sources

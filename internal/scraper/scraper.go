@@ -156,7 +156,13 @@ func (s *Scraper) scrapeSource(ctx context.Context, source models.Source) error 
     }
 
     // Set User-Agent to identify our bot
-    req.Header.Set("User-Agent", s.userAgent)
+    // req.Header.Set("User-Agent", s.userAgent)
+    req.Header.Set("User-Agent",
+    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "+
+        "(KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36")
+
+    req.Header.Set("Accept-Language", "en-US,en;q=0.9")
+    req.Header.Set("Accept", "text/html,application/xhtml+xml")
 
     // STEP 3: Execute HTTP request
     resp, err := s.client.Do(req)
