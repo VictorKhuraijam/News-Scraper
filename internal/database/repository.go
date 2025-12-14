@@ -1,9 +1,10 @@
 package database
 
 import (
-    "context"
-    "database/sql"
-    "news-scraper/internal/models"
+	"context"
+	"database/sql"
+	// "fmt"
+	"news-scraper/internal/models"
 )
 
 // Repository provides database operations
@@ -38,6 +39,7 @@ func (r *Repository) GetActiveSources(ctx context.Context) ([]models.Source, err
         }
         sources = append(sources, s)
     }
+    // fmt.Println("Sources from database: ",sources)
     return sources, rows.Err()
 }
 
@@ -45,12 +47,12 @@ func (r *Repository) GetActiveSources(ctx context.Context) ([]models.Source, err
 // Uses ON DUPLICATE KEY UPDATE to avoid duplicate entries
 // If article URL already exists, it updates title and summary
 func (r *Repository) SaveArticle(ctx context.Context, article *models.Article) error {
-    query := `INSERT INTO articles (source_id, title, url, summary, category, scraped_at)
-              VALUES (?, ?, ?, ?, ?, NOW())
+    query := `INSERT INTO articles (source_id, source_name, title, url, summary, category, scraped_at)
+              VALUES (?, ?, ?, ?, ?, ?, NOW())
               ON DUPLICATE KEY UPDATE title=VALUES(title), summary=VALUES(summary), category = VALUES(category), scraped_at = NOW()`
 
     _, err := r.db.ExecContext(ctx, query,
-        article.SourceID, article.Title, article.URL, article.Summary, article.Category)
+        article.SourceID, article.SourceName , article.Title, article.URL, article.Summary, article.Category)
 
     return err
 }

@@ -80,3 +80,49 @@ func (h *ArticlesHandler) RenderArticlesList(c *fiber.Ctx) error {
     c.Set("Content-Type", "text/html")
     return templates.ArticlesList(articles).Render(c.Context(), c.Response().BodyWriter())
 }
+
+
+// NEW: Get articles by category
+func (h *ArticlesHandler) GetByCategory(c *fiber.Ctx) error {
+    category := c.Params("category")
+    limit := 50
+
+    articles, err := h.repo.GetArticlesByCategory(c.Context(), category, limit)
+    if err != nil {
+        return c.Status(500).JSON(fiber.Map{
+            "error": "Failed to fetch articles",
+        })
+    }
+
+    return c.JSON(articles)
+}
+
+// NEW: Render articles by category
+func (h *ArticlesHandler) RenderArticlesByCategory(c *fiber.Ctx) error {
+    category := c.Params("category")
+    limit := 50
+
+    articles, err := h.repo.GetArticlesByCategory(c.Context(), category, limit)
+    if err != nil {
+        return c.Status(500).SendString("Failed to load articles")
+    }
+
+    return templates.ArticlesWithCategory(articles, category).Render(
+        c.Context(),
+        c.Response().BodyWriter(),
+    )
+}
+
+// NEW: Get all categories
+func (h *ArticlesHandler) GetCategories(c *fiber.Ctx) error {
+    categories, err := h.repo.GetCategories(c.Context())
+    if err != nil {
+        return c.Status(500).JSON(fiber.Map{
+            "error": "Failed to fetch categories",
+        })
+    }
+
+    return c.JSON(fiber.Map{
+        "categories": categories,
+    })
+}

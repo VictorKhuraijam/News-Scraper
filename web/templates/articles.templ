@@ -58,7 +58,12 @@ templ ArticleCard(article models.Article) {
                     <svg class="h-4 w-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"></path>
                     </svg>
-                    Source #{fmt.Sprintf("%d", article.SourceID)}
+                    Source #{fmt.Sprintf("%s", article.SourceName)}
+                </span>
+
+                <!-- NEW: Show category badge -->
+                <span class={getCategoryClass(article.Category)}>
+                    {article.Category}
                 </span>
             </div>
             <a href={templ.URL(article.URL)} target="_blank" class="text-blue-600 hover:text-blue-800 font-medium">
@@ -67,3 +72,43 @@ templ ArticleCard(article models.Article) {
         </div>
     </div>
 }
+
+// NEW: Helper function for category badge colors
+func getCategoryClass(category string) string {
+    switch category {
+    case "technology":
+        return "px-2 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800"
+    case "sports":
+        return "px-2 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800"
+    case "politics":
+        return "px-2 py-1 rounded-full text-xs font-medium bg-red-100 text-red-800"
+    case "business":
+        return "px-2 py-1 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800"
+    case "entertainment":
+        return "px-2 py-1 rounded-full text-xs font-medium bg-purple-100 text-purple-800"
+    case "health":
+        return "px-2 py-1 rounded-full text-xs font-medium bg-pink-100 text-pink-800"
+    default:
+        return "px-2 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-800"
+    }
+}
+
+// NEW: Template for category-filtered view
+templ ArticlesWithCategory(articles []models.Article, category string) {
+    @Layout("Articles - " + category) {
+        <div class="px-4 py-6 sm:px-0">
+            <div class="flex justify-between items-center mb-6">
+                <div>
+                    <h1 class="text-3xl font-bold text-gray-800 capitalize">{category} Articles</h1>
+                    <p class="text-gray-600 mt-1">{fmt.Sprintf("%d", len(articles))} articles found</p>
+                </div>
+                <a href="/articles" class="bg-gray-200 hover:bg-gray-300 text-gray-700 px-4 py-2 rounded-md">
+                    View All Categories
+                </a>
+            </div>
+
+            @ArticlesList(articles)
+        </div>
+    }
+}
+

@@ -85,7 +85,7 @@ func main() {
         timeout = 30 * time.Second
     }
 
-    // Initialize scraper
+    // Initialize Colly-based scraper
     scraperInstance := scraper.NewScraper(repo, scraper.Config{
         Workers:   cfg.Scraper.Workers,
         Timeout:   timeout,
@@ -126,6 +126,13 @@ func main() {
     api.Get("/articles", articlesHandler.GetRecent)
     api.Get("/articles/source/:sourceId", articlesHandler.GetBySource)
     api.Post("/scrape", scrapeHandler.TriggerScrape)
+    api.Get("/articles-list", articlesHandler.RenderArticlesList)
+
+    // Category routes
+    api.Get("/categories", articlesHandler.GetCategories)
+    api.Get("/articles/category/:category", articlesHandler.GetByCategory)
+    app.Get("/articles/category/:category", articlesHandler.RenderArticlesByCategory)
+
 
     // Graceful shutdown
     quit := make(chan os.Signal, 1)
@@ -146,6 +153,7 @@ func main() {
     // Start server
     addr := cfg.Server.Host + ":" + cfg.Server.Port
     log.Printf("Server starting on %s", addr)
+    log.Println("Using Colly for web scraping")
 
     if err := app.Listen(addr); err != nil {
         log.Fatal("Server failed to start:", err)
