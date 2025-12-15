@@ -1,22 +1,23 @@
 package main
 
 import (
-    "context"
-    "log"
-    "os"
-    "os/signal"
-    "syscall"
-    "time"
+	"context"
+	"fmt"
+	"log"
+	"os"
+	"os/signal"
+	"syscall"
+	"time"
 
-    "github.com/gofiber/fiber/v2"
-    "github.com/gofiber/fiber/v2/middleware/logger"
-    "github.com/gofiber/fiber/v2/middleware/recover"
-    "gopkg.in/yaml.v3"
+	"github.com/gofiber/fiber/v2"
+	"github.com/gofiber/fiber/v2/middleware/logger"
+	"github.com/gofiber/fiber/v2/middleware/recover"
+	"gopkg.in/yaml.v3"
 
-    "news-scraper/internal/database"
-    "news-scraper/internal/handlers"
-    "news-scraper/internal/scheduler"
-    "news-scraper/internal/scraper"
+	"news-scraper/internal/database"
+	"news-scraper/internal/handlers"
+	"news-scraper/internal/scheduler"
+	"news-scraper/internal/scraper"
 )
 
 type Config struct {
@@ -130,8 +131,13 @@ func main() {
 
     // Category routes
     api.Get("/categories", articlesHandler.GetCategories)
-    api.Get("/articles/category/:category", articlesHandler.GetByCategory)
     app.Get("/articles/category/:category", articlesHandler.RenderArticlesByCategory)
+    // api.Get("/articles/category/:category", articlesHandler.GetByCategory)
+
+    for _, route := range app.GetRoutes() {
+    fmt.Printf("%s\t%s\n", route.Method, route.Path)
+}
+
 
 
     // Graceful shutdown

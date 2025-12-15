@@ -1,10 +1,12 @@
 package handlers
 
 import (
-    "github.com/gofiber/fiber/v2"
-    "news-scraper/internal/database"
-    "news-scraper/web/templates"
-    "strconv"
+	"fmt"
+	"news-scraper/internal/database"
+	"news-scraper/web/templates"
+	"strconv"
+
+	"github.com/gofiber/fiber/v2"
 )
 
 type ArticlesHandler struct {
@@ -83,19 +85,19 @@ func (h *ArticlesHandler) RenderArticlesList(c *fiber.Ctx) error {
 
 
 // NEW: Get articles by category
-func (h *ArticlesHandler) GetByCategory(c *fiber.Ctx) error {
-    category := c.Params("category")
-    limit := 50
+// func (h *ArticlesHandler) GetByCategory(c *fiber.Ctx) error {
+//     category := c.Params("category")
+//     limit := 50
 
-    articles, err := h.repo.GetArticlesByCategory(c.Context(), category, limit)
-    if err != nil {
-        return c.Status(500).JSON(fiber.Map{
-            "error": "Failed to fetch articles",
-        })
-    }
+//     articles, err := h.repo.GetArticlesByCategory(c.Context(), category, limit)
+//     if err != nil {
+//         return c.Status(500).JSON(fiber.Map{
+//             "error": "Failed to fetch articles",
+//         })
+//     }
 
-    return c.JSON(articles)
-}
+//     return c.JSON(articles)
+// }
 
 // NEW: Render articles by category
 func (h *ArticlesHandler) RenderArticlesByCategory(c *fiber.Ctx) error {
@@ -104,9 +106,11 @@ func (h *ArticlesHandler) RenderArticlesByCategory(c *fiber.Ctx) error {
 
     articles, err := h.repo.GetArticlesByCategory(c.Context(), category, limit)
     if err != nil {
+        fmt.Println("Render articles by category error :", err)
         return c.Status(500).SendString("Failed to load articles")
     }
 
+    c.Set("Content-Type", "text/html")
     return templates.ArticlesWithCategory(articles, category).Render(
         c.Context(),
         c.Response().BodyWriter(),

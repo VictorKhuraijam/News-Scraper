@@ -3,6 +3,8 @@ package database
 import (
 	"context"
 	"database/sql"
+	"fmt"
+
 	// "fmt"
 	"news-scraper/internal/models"
 )
@@ -83,10 +85,11 @@ func (r *Repository) GetRecentArticles(ctx context.Context, limit int) ([]models
 
 //Get articles by category
 func(r *Repository) GetArticlesByCategory(ctx context.Context, category string, limit int ) ([]models.Article, error) {
-    query := `SELECT id, source_id, source_name, title, url, summary, category, scraped_at, created_at FROM articles where category = ? ORDER BY scraped_at DESC LIMIT 5 ?`
+    query := `SELECT id, source_id, source_name, title, url, summary, category, scraped_at, created_at FROM articles where category = ? ORDER BY scraped_at DESC LIMIT ?`
 
     rows, err := r.db.QueryContext(ctx, query, category, limit)
     if err != nil {
+        fmt.Println("Get articles by category query error :", err)
         return nil, err
     }
     defer rows.Close()

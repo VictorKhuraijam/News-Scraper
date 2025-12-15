@@ -47,14 +47,14 @@ func Articles(articles []models.Article) templ.Component {
 				}()
 			}
 			ctx = templ.InitializeContext(ctx)
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<div class=\"px-4 py-6 sm:px-0\"><div class=\"flex justify-between items-center mb-6\"><h1 class=\"text-3xl font-bold text-gray-800\">Latest Articles</h1><div class=\"flex items-center space-x-4\"><button hx-get=\"/api/articles\" hx-target=\"#articles-list\" class=\"bg-gray-200 hover:bg-gray-300 text-gray-700 px-4 py-2 rounded-md\">Refresh</button> <span class=\"text-sm text-gray-500\">")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<!-- NEW: Category Filter --> <div class=\"bg-white rounded-lg shadow-md p-6 mb-8\"><h2 class=\"text-2xl font-semibold mb-4 text-gray-800\">Browse by Category</h2><div class=\"grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-3\"><a href=\"/articles\" class=\"bg-gray-100 hover:bg-gray-200 text-gray-800 px-4 py-3 rounded-lg text-center font-medium transition\">All</a> <a href=\"/articles/category/technology\" class=\"bg-blue-100 hover:bg-blue-200 text-blue-800 px-4 py-3 rounded-lg text-center font-medium transition\">Technology</a> <a href=\"/articles/category/sports\" class=\"bg-green-100 hover:bg-green-200 text-green-800 px-4 py-3 rounded-lg text-center font-medium transition\">Sports</a> <a href=\"/articles/category/politics\" class=\"bg-red-100 hover:bg-red-200 text-red-800 px-4 py-3 rounded-lg text-center font-medium transition\">Politics</a> <a href=\"/articles/category/business\" class=\"bg-yellow-100 hover:bg-yellow-200 text-yellow-800 px-4 py-3 rounded-lg text-center font-medium transition\">Business</a> <a href=\"/articles/category/entertainment\" class=\"bg-purple-100 hover:bg-purple-200 text-purple-800 px-4 py-3 rounded-lg text-center font-medium transition\">Entertainment</a> <a href=\"/articles/category/health\" class=\"bg-pink-100 hover:bg-pink-200 text-pink-800 px-4 py-3 rounded-lg text-center font-medium transition\">Health</a></div></div><div class=\"px-4 py-6 sm:px-0\"><div class=\"flex justify-between items-center mb-6\"><h1 class=\"text-3xl font-bold text-gray-800\">Latest Articles</h1><div class=\"flex items-center space-x-4\"><button hx-get=\"/api/articles\" hx-target=\"#articles-list\" class=\"bg-gray-200 hover:bg-gray-300 text-gray-700 px-4 py-2 rounded-md\">Refresh</button> <span class=\"text-sm text-gray-500\">")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
 			var templ_7745c5c3_Var3 string
 			templ_7745c5c3_Var3, templ_7745c5c3_Err = templ.JoinStringErrs(fmt.Sprintf("%d", len(articles)))
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `web/templates/articles.templ`, Line: 22, Col: 57}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `web/templates/articles.templ`, Line: 50, Col: 57}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var3))
 			if templ_7745c5c3_Err != nil {
@@ -110,7 +110,7 @@ func ArticleCard(article models.Article) templ.Component {
 		var templ_7745c5c3_Var5 templ.SafeURL
 		templ_7745c5c3_Var5, templ_7745c5c3_Err = templ.JoinURLErrs(templ.URL(article.URL))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `web/templates/articles.templ`, Line: 36, Col: 47}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `web/templates/articles.templ`, Line: 64, Col: 47}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var5))
 		if templ_7745c5c3_Err != nil {
@@ -123,7 +123,7 @@ func ArticleCard(article models.Article) templ.Component {
 		var templ_7745c5c3_Var6 string
 		templ_7745c5c3_Var6, templ_7745c5c3_Err = templ.JoinStringErrs(article.Title)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `web/templates/articles.templ`, Line: 37, Col: 34}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `web/templates/articles.templ`, Line: 65, Col: 34}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var6))
 		if templ_7745c5c3_Err != nil {
@@ -141,7 +141,7 @@ func ArticleCard(article models.Article) templ.Component {
 			var templ_7745c5c3_Var7 string
 			templ_7745c5c3_Var7, templ_7745c5c3_Err = templ.JoinStringErrs(article.Summary)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `web/templates/articles.templ`, Line: 46, Col: 71}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `web/templates/articles.templ`, Line: 74, Col: 71}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var7))
 			if templ_7745c5c3_Err != nil {
@@ -159,7 +159,7 @@ func ArticleCard(article models.Article) templ.Component {
 		var templ_7745c5c3_Var8 string
 		templ_7745c5c3_Var8, templ_7745c5c3_Err = templ.JoinStringErrs(formatTime(article.ScrapedAt))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `web/templates/articles.templ`, Line: 55, Col: 58}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `web/templates/articles.templ`, Line: 83, Col: 58}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var8))
 		if templ_7745c5c3_Err != nil {
@@ -172,7 +172,7 @@ func ArticleCard(article models.Article) templ.Component {
 		var templ_7745c5c3_Var9 string
 		templ_7745c5c3_Var9, templ_7745c5c3_Err = templ.JoinStringErrs(fmt.Sprintf("%s", article.SourceName))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `web/templates/articles.templ`, Line: 61, Col: 66}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `web/templates/articles.templ`, Line: 89, Col: 66}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var9))
 		if templ_7745c5c3_Err != nil {
@@ -207,7 +207,7 @@ func ArticleCard(article models.Article) templ.Component {
 		var templ_7745c5c3_Var12 string
 		templ_7745c5c3_Var12, templ_7745c5c3_Err = templ.JoinStringErrs(article.Category)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `web/templates/articles.templ`, Line: 66, Col: 37}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `web/templates/articles.templ`, Line: 94, Col: 37}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var12))
 		if templ_7745c5c3_Err != nil {
@@ -220,7 +220,7 @@ func ArticleCard(article models.Article) templ.Component {
 		var templ_7745c5c3_Var13 templ.SafeURL
 		templ_7745c5c3_Var13, templ_7745c5c3_Err = templ.JoinURLErrs(templ.URL(article.URL))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `web/templates/articles.templ`, Line: 69, Col: 43}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `web/templates/articles.templ`, Line: 97, Col: 43}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var13))
 		if templ_7745c5c3_Err != nil {
@@ -295,7 +295,7 @@ func ArticlesWithCategory(articles []models.Article, category string) templ.Comp
 			var templ_7745c5c3_Var16 string
 			templ_7745c5c3_Var16, templ_7745c5c3_Err = templ.JoinStringErrs(category)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `web/templates/articles.templ`, Line: 102, Col: 85}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `web/templates/articles.templ`, Line: 130, Col: 85}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var16))
 			if templ_7745c5c3_Err != nil {
@@ -308,7 +308,7 @@ func ArticlesWithCategory(articles []models.Article, category string) templ.Comp
 			var templ_7745c5c3_Var17 string
 			templ_7745c5c3_Var17, templ_7745c5c3_Err = templ.JoinStringErrs(fmt.Sprintf("%d", len(articles)))
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `web/templates/articles.templ`, Line: 103, Col: 83}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `web/templates/articles.templ`, Line: 131, Col: 83}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var17))
 			if templ_7745c5c3_Err != nil {
