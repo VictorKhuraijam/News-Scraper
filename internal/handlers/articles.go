@@ -29,7 +29,7 @@ func (h *ArticlesHandler) GetRecent(c *fiber.Ctx) error {
 
     // return c.JSON(articles)
     c.Set("Content-Type", "text/html")
-    return templates.ArticlesList(articles).Render(c.Context(), c.Response().BodyWriter())
+    return templates.Articles(articles).Render(c.Context(), c.Response().BodyWriter())
 }
 
 // GetBySource returns articles from specific source as JSON (for API)

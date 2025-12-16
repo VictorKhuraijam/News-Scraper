@@ -2,7 +2,7 @@ package main
 
 import (
 	"context"
-	"fmt"
+	// "fmt"
 	"log"
 	"os"
 	"os/signal"
@@ -134,9 +134,9 @@ func main() {
     app.Get("/articles/category/:category", articlesHandler.RenderArticlesByCategory)
     // api.Get("/articles/category/:category", articlesHandler.GetByCategory)
 
-    for _, route := range app.GetRoutes() {
-    fmt.Printf("%s\t%s\n", route.Method, route.Path)
-}
+    // for _, route := range app.GetRoutes() {
+    //     fmt.Printf("%s\t%s\n", route.Method, route.Path) //GET /xyz
+    // }
 
 
 

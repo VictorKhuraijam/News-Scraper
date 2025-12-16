@@ -13,9 +13,9 @@ import (
 // ScrapeWithPagination scrapes multiple pages (for sites with pagination)
 func (s *Scraper) ScrapeWithPagination(ctx context.Context, source models.Source, maxPages int) error {
     c := colly.NewCollector(
-        colly.UserAgent(s.userAgent),
-        colly.AllowedDomains(extractDomain(source.URL)),
-        colly.MaxDepth(maxPages),
+         colly.UserAgent(s.userAgent),
+         colly.AllowedDomains(extractDomain(source.URL)),
+         colly.MaxDepth(maxPages),
     )
 
     // Configure rate limiting
