@@ -17,7 +17,6 @@ import (
 )
 
 // Scraper coordinates the scraping process
-// It manages workers, rate limiting, and HTTP requests
 type Scraper struct {
     repo        *database.Repository  // Database access for saving articles
     userAgent   string                // User-Agent header value
