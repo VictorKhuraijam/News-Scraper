@@ -22,9 +22,11 @@ func (h *ArticlesHandler) GetRecent(c *fiber.Ctx) error {
     limit := 100
     articles, err := h.repo.GetRecentArticles(c.Context(), limit)
     if err != nil {
-        return c.Status(500).JSON(fiber.Map{
-            "error": "Failed to fetch articles",
-        })
+        // return c.Status(500).JSON(fiber.Map{
+        //     "error": "Failed to fetch articles",
+        // })
+        c.Set("Content-Type", "text/html")
+        return templates.ErrorMessage("Failed to fetch articles").Render(c.Context(), c.Request().BodyWriter())
     }
 
     // return c.JSON(articles)
@@ -36,16 +38,22 @@ func (h *ArticlesHandler) GetRecent(c *fiber.Ctx) error {
 func (h *ArticlesHandler) GetBySource(c *fiber.Ctx) error {
     sourceID, err := strconv.Atoi(c.Params("sourceId"))
     if err != nil {
-        return c.Status(400).JSON(fiber.Map{
-            "error": "Invalid source ID",
-        })
+        // return c.Status(400).JSON(fiber.Map{
+        //     "error": "Invalid source ID",
+        // })
+          c.Set("Content-Type", "text/html")
+        return templates.ErrorMessage("Invalid source ID").Render(c.Context(), c.Request().BodyWriter())
+
     }
 
     articles, err := h.repo.GetArticlesBySource(c.Context(), sourceID)
     if err != nil {
-        return c.Status(500).JSON(fiber.Map{
-            "error": "Failed to fetch articles",
-        })
+        // return c.Status(500).JSON(fiber.Map{
+        //     "error": "Failed to fetch articles",
+        // })
+          c.Set("Content-Type", "text/html")
+        return templates.ErrorMessage("Failed to fetch articles").Render(c.Context(), c.Request().BodyWriter())
+
     }
 
     // return c.JSON(articles)
@@ -59,7 +67,10 @@ func (h *ArticlesHandler) RenderArticles(c *fiber.Ctx) error {
     limit := 100
     articles, err := h.repo.GetRecentArticles(c.Context(), limit)
     if err != nil {
-        return c.Status(500).SendString("Failed to load articles")
+        // return c.Status(500).SendString("Failed to load articles")
+        c.Set("Content-Type", "text/html")
+        return templates.ErrorMessage("Failed to load articles from RenderArticles").Render(c.Context(), c.Request().BodyWriter())
+
     }
 
     // return c.Render("articles", fiber.Map{
@@ -75,7 +86,10 @@ func (h *ArticlesHandler) RenderArticlesList(c *fiber.Ctx) error {
     limit := 100
     articles, err := h.repo.GetRecentArticles(c.Context(), limit)
     if err != nil {
-        return c.Status(500).SendString("Failed to load articles")
+        // return c.Status(500).SendString("Failed to load articles")
+        c.Set("Content-Type", "text/html")
+        return templates.ErrorMessage("Failed to load articles for RenderArticlesList").Render(c.Context(), c.Request().BodyWriter())
+
     }
 
     // Render only the article list component (no layout)
@@ -107,7 +121,10 @@ func (h *ArticlesHandler) RenderArticlesByCategory(c *fiber.Ctx) error {
     articles, err := h.repo.GetArticlesByCategory(c.Context(), category, limit)
     if err != nil {
         fmt.Println("Render articles by category error :", err)
-        return c.Status(500).SendString("Failed to load articles")
+        // return c.Status(500).SendString("Failed to load articles")
+        c.Set("Content-Type", "text/html")
+        return templates.ErrorMessage("Failed to load articles for RenderArticlesByCategory").Render(c.Context(), c.Request().BodyWriter())
+
     }
 
     c.Set("Content-Type", "text/html")
@@ -121,9 +138,12 @@ func (h *ArticlesHandler) RenderArticlesByCategory(c *fiber.Ctx) error {
 func (h *ArticlesHandler) GetCategories(c *fiber.Ctx) error {
     categories, err := h.repo.GetCategories(c.Context())
     if err != nil {
-        return c.Status(500).JSON(fiber.Map{
-            "error": "Failed to fetch categories",
-        })
+        // return c.Status(500).JSON(fiber.Map{
+        //     "error": "Failed to fetch categories",
+        // })
+        c.Set("Content-Type", "text/html")
+        return templates.ErrorMessage("Failed to fetch categories for GetCategories").Render(c.Context(), c.Request().BodyWriter())
+
     }
 
     return c.JSON(fiber.Map{
