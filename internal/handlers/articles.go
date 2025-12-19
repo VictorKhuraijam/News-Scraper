@@ -31,6 +31,11 @@ func (h *ArticlesHandler) GetRecent(c *fiber.Ctx) error {
 
     // return c.JSON(articles)
     c.Set("Content-Type", "text/html")
+
+    // Check if this is an HTMX request
+    if c.Get("HX-Request") != "" {
+        return templates.ArticlesContent(articles, "all").Render(c.Context(), c.Response().BodyWriter())
+    }
     return templates.Articles(articles).Render(c.Context(), c.Response().BodyWriter())
 }
 
@@ -128,7 +133,7 @@ func (h *ArticlesHandler) RenderArticlesByCategory(c *fiber.Ctx) error {
     }
 
     c.Set("Content-Type", "text/html")
-    return templates.ArticlesWithCategory(articles, category).Render(
+    return templates.ArticlesContent(articles, category).Render(
         c.Context(),
         c.Response().BodyWriter(),
     )

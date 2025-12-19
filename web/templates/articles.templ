@@ -11,51 +11,71 @@ templ Articles(articles []models.Article) {
          <!-- NEW: Category Filter -->
         <div class="bg-white rounded-lg shadow-md p-6 mb-8">
             <h2 class="text-2xl font-semibold mb-4 text-gray-800">Browse by Category</h2>
-            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-3">
-                <a href="/api/articles" class="bg-gray-100 hover:bg-gray-200 text-gray-800 px-4 py-3 rounded-lg text-center font-medium transition">
+
+             <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-3">
+                <button
+                    hx-get="/api/articles"
+                    hx-target="#articles-content"
+                    class="bg-gray-100 hover:bg-gray-200 text-gray-800 px-4 py-3 rounded-lg text-center font-medium transition">
                     All
-                </a>
-                <a href="/api/articles/category/technology" class="bg-blue-100 hover:bg-blue-200 text-blue-800 px-4 py-3 rounded-lg text-center font-medium transition">
-                    Technology
-                </a>
-                <a href="/api/articles/category/sports" class="bg-green-100 hover:bg-green-200 text-green-800 px-4 py-3 rounded-lg text-center font-medium transition">
-                    Sports
-                </a>
-                <a href="/api/articles/category/politics" class="bg-red-100 hover:bg-red-200 text-red-800 px-4 py-3 rounded-lg text-center font-medium transition">
-                    Politics
-                </a>
-                <a href="/api/articles/category/business" class="bg-yellow-100 hover:bg-yellow-200 text-yellow-800 px-4 py-3 rounded-lg text-center font-medium transition">
-                    Business
-                </a>
-                <a href="/api/articles/category/entertainment" class="bg-purple-100 hover:bg-purple-200 text-purple-800 px-4 py-3 rounded-lg text-center font-medium transition">
-                    Entertainment
-                </a>
-                <a href="/api/articles/category/health" class="bg-pink-100 hover:bg-pink-200 text-pink-800 px-4 py-3 rounded-lg text-center font-medium transition">
-                    Health
-                </a>
+                </button>
+                for _, cat := range []string{"technology", "sports", "politics", "business", "entertainment", "health"} {
+                    <button
+                        hx-get={"/api/articles/category/" + cat}
+                        hx-target="#articles-content"
+                        class={getCategoryButtonClass(cat)}>
+                        {capitalize(cat)}
+                    </button>
+                }
             </div>
         </div>
 
-        <div class="px-4 py-6 sm:px-0">
-            <div class="flex justify-between items-center mb-6">
-                <h1 class="text-3xl font-bold text-gray-800">Latest Articles</h1>
-                <div class="flex items-center space-x-4">
+         <div id="articles-content">
+           <div class="px-4 py-6 sm:px-0">
+                <div class="flex justify-between items-center mb-6">
+                    <div>
+                        <h1 class="text-3xl font-bold text-gray-800">Latest Articles</h1>
+                        <p class="text-gray-600 mt-1">{fmt.Sprintf("%d", len(articles))} articles found</p>
+                    </div>
                     <button
                         hx-get="/api/articles"
-                        hx-target="#articles-list"
+                        hx-target="#articles-content"
                         class="bg-gray-200 hover:bg-gray-300 text-gray-700 px-4 py-2 rounded-md">
                         Refresh
                     </button>
-                    <span class="text-sm text-gray-500">
-                        {fmt.Sprintf("%d", len(articles))} articles
-                    </span>
                 </div>
-            </div>
 
-            @ArticlesList(articles)
-            // @ArticlesWithCategory(articles, category)
+                @ArticlesList(articles)
+            </div>
         </div>
     }
+
+    
+}
+
+templ ArticlesContent(articles []models.Article, category string) {
+    <div class="px-4 py-6 sm:px-0">
+        <div class="flex justify-between items-center mb-6">
+            <div>
+                <h1 class="text-3xl font-bold text-gray-800 capitalize">
+                    if category == "all" {
+                        Latest Articles
+                    } else {
+                        {category} Articles
+                    }
+                </h1>
+                <p class="text-gray-600 mt-1">{fmt.Sprintf("%d", len(articles))} articles found</p>
+            </div>
+            <button
+                hx-get="/api/articles"
+                hx-target="#articles-list"
+                class="bg-gray-200 hover:bg-gray-300 text-gray-700 px-4 py-2 rounded-md">
+                Refresh
+            </button>
+        </div>
+
+        @ArticlesList(articles)
+    </div>
 }
 
 templ ArticlesList(articles []models.Article) {
@@ -137,6 +157,32 @@ func getCategoryClass(category string) string {
     default:
         return "px-2 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-800"
     }
+}
+
+func getCategoryButtonClass(category string) string {
+    switch category {
+    case "technology":
+        return "bg-blue-100 hover:bg-blue-200 text-blue-800 px-4 py-3 rounded-lg text-center font-medium transition"
+    case "sports":
+        return "bg-green-100 hover:bg-green-200 text-green-800 px-4 py-3 rounded-lg text-center font-medium transition"
+    case "politics":
+        return "bg-red-100 hover:bg-red-200 text-red-800 px-4 py-3 rounded-lg text-center font-medium transition"
+    case "business":
+        return "bg-yellow-100 hover:bg-yellow-200 text-yellow-800 px-4 py-3 rounded-lg text-center font-medium transition"
+    case "entertainment":
+        return "bg-purple-100 hover:bg-purple-200 text-purple-800 px-4 py-3 rounded-lg text-center font-medium transition"
+    case "health":
+        return "bg-pink-100 hover:bg-pink-200 text-pink-800 px-4 py-3 rounded-lg text-center font-medium transition"
+     default:
+        return "bg-gray-100 hover:bg-gray-200 text-gray-800 px-4 py-3 rounded-lg text-center font-medium transition"
+    }
+}
+
+func capitalize(s string) string {
+    if len(s) == 0 {
+        return s
+    }
+    return string(s[0]-32) + s[1:]
 }
 
 // NEW: Template for category-filtered view

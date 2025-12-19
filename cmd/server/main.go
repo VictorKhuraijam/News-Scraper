@@ -131,7 +131,7 @@ func main() {
 
     // Category routes
     api.Get("/categories", articlesHandler.GetCategories)
-    app.Get("/articles/category/:category", articlesHandler.RenderArticlesByCategory)
+    api.Get("/articles/category/:category", articlesHandler.RenderArticlesByCategory)
     // api.Get("/articles/category/:category", articlesHandler.GetByCategory)
 
     // for _, route := range app.GetRoutes() {
