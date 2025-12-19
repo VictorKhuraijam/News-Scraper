@@ -120,7 +120,7 @@ func main() {
 
     // Routes
     app.Get("/", homeHandler.Index)
-    app.Get("/articles", articlesHandler.RenderArticles)
+    // app.Get("/articles", articlesHandler.RenderArticles)
 
     // API routes
     api := app.Group("/api")
