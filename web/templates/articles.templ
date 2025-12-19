@@ -6,7 +6,7 @@ import (
 	"fmt"
 )
 
-templ Articles(articles []models.Article, category string) {
+templ Articles(articles []models.Article) {
     @Layout("News Articles") {
          <!-- NEW: Category Filter -->
         <div class="bg-white rounded-lg shadow-md p-6 mb-8">
@@ -52,8 +52,8 @@ templ Articles(articles []models.Article, category string) {
                 </div>
             </div>
 
-            // @ArticlesList(articles)
-            @ArticlesWithCategory(articles, category)
+            @ArticlesList(articles)
+            // @ArticlesWithCategory(articles, category)
         </div>
     }
 }
