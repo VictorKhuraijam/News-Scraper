@@ -10,7 +10,7 @@ templ Home() {
                     Automatically collect and aggregate news from multiple sources using concurrent scraping
                 </p>
                 <div class="flex space-x-4">
-                    <a href="/articles" class="bg-white text-blue-600 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition">
+                    <a href="/api/articles" class="bg-white text-blue-600 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition">
                         View Articles
                     </a>
                     <button
@@ -53,15 +53,15 @@ templ Home() {
             <div class="bg-white rounded-lg shadow-md p-6">
                 <h2 class="text-2xl font-bold mb-4 text-gray-800">Recent Activity</h2>
                 <div
-                    hx-get="/articles"
+                    hx-get="/api/articles/recent"
                     hx-trigger="load"
                     hx-target="#articles-preview"
                     class="min-h-[200px]">
                     @LoadingSpinner()
                 </div>
+                <div id="articles-preview"></div>
+                </div>
             </div>
 
-        <div id="articles-preview"></div>
-        </div>
     }
 }

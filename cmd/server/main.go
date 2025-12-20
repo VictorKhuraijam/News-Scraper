@@ -125,6 +125,7 @@ func main() {
     // API routes
     api := app.Group("/api")
     api.Get("/articles", articlesHandler.GetRecent)
+    api.Get("/articles/recent", articlesHandler.GetRecentActivity)
     api.Get("/articles/source/:sourceId", articlesHandler.GetBySource)
     api.Post("/scrape", scrapeHandler.TriggerScrape)
     api.Get("/articles-list", articlesHandler.RenderArticlesList)

@@ -39,6 +39,22 @@ func (h *ArticlesHandler) GetRecent(c *fiber.Ctx) error {
     return templates.Articles(articles).Render(c.Context(), c.Response().BodyWriter())
 }
 
+func (h *ArticlesHandler) GetRecentActivity(c *fiber.Ctx) error {
+    limit := 10
+    articles, err := h.repo.GetRecentArticles(c.Context(), limit)
+    if err != nil {
+        // return c.Status(500).JSON(fiber.Map{
+        //     "error": "Failed to fetch articles",
+        // })
+        c.Set("Content-Type", "text/html")
+        return templates.ErrorMessage("Failed to fetch articles").Render(c.Context(), c.Request().BodyWriter())
+    }
+
+    // return c.JSON(articles)
+    c.Set("Content-Type", "text/html")
+    return templates.ArticlesList(articles).Render(c.Context(), c.Response().BodyWriter())
+}
+
 // GetBySource returns articles from specific source as JSON (for API)
 func (h *ArticlesHandler) GetBySource(c *fiber.Ctx) error {
     sourceID, err := strconv.Atoi(c.Params("sourceId"))

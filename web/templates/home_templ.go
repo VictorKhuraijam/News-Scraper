@@ -41,7 +41,7 @@ func Home() templ.Component {
 				}()
 			}
 			ctx = templ.InitializeContext(ctx)
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<div class=\"px-4 py-6 sm:px-0\"><!-- Hero Section --><div class=\"bg-gradient-to-r from-blue-500 to-blue-700 rounded-lg shadow-xl p-8 mb-8 text-white\"><h1 class=\"text-4xl font-bold mb-4\">Welcome to News Scraper</h1><p class=\"text-xl mb-6\">Automatically collect and aggregate news from multiple sources using concurrent scraping</p><div class=\"flex space-x-4\"><a href=\"/articles\" class=\"bg-white text-blue-600 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition\">View Articles</a> <button hx-post=\"/api/scrape\" hx-indicator=\"#scrape-indicator\" hx-target=\"#scrape-result\" hx-swap=\"innerHTML\" class=\"bg-blue-800 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-900 transition\">Start Scraping</button></div><div id=\"scrape-indicator\" class=\"htmx-indicator mt-4\"><div class=\"flex items-center\"><svg class=\"animate-spin h-5 w-5 mr-3\" viewBox=\"0 0 24 24\"><circle class=\"opacity-25\" cx=\"12\" cy=\"12\" r=\"10\" stroke=\"currentColor\" stroke-width=\"4\" fill=\"none\"></circle> <path class=\"opacity-75\" fill=\"currentColor\" d=\"M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z\"></path></svg> <span>Scraping in progress...</span></div></div></div><div id=\"scrape-result\" class=\"mt-4 mb-4\" hx-on::after-settle=\"setTimeout(() => this.innerHTML = '', 5000)\"></div><!-- Features Grid --><div class=\"grid grid-cols-1 md:grid-cols-3 gap-6 mb-8\">")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<div class=\"px-4 py-6 sm:px-0\"><!-- Hero Section --><div class=\"bg-gradient-to-r from-blue-500 to-blue-700 rounded-lg shadow-xl p-8 mb-8 text-white\"><h1 class=\"text-4xl font-bold mb-4\">Welcome to News Scraper</h1><p class=\"text-xl mb-6\">Automatically collect and aggregate news from multiple sources using concurrent scraping</p><div class=\"flex space-x-4\"><a href=\"/api/articles\" class=\"bg-white text-blue-600 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition\">View Articles</a> <button hx-post=\"/api/scrape\" hx-indicator=\"#scrape-indicator\" hx-target=\"#scrape-result\" hx-swap=\"innerHTML\" class=\"bg-blue-800 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-900 transition\">Start Scraping</button></div><div id=\"scrape-indicator\" class=\"htmx-indicator mt-4\"><div class=\"flex items-center\"><svg class=\"animate-spin h-5 w-5 mr-3\" viewBox=\"0 0 24 24\"><circle class=\"opacity-25\" cx=\"12\" cy=\"12\" r=\"10\" stroke=\"currentColor\" stroke-width=\"4\" fill=\"none\"></circle> <path class=\"opacity-75\" fill=\"currentColor\" d=\"M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z\"></path></svg> <span>Scraping in progress...</span></div></div></div><div id=\"scrape-result\" class=\"mt-4 mb-4\" hx-on::after-settle=\"setTimeout(() => this.innerHTML = '', 5000)\"></div><!-- Features Grid --><div class=\"grid grid-cols-1 md:grid-cols-3 gap-6 mb-8\">")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -69,7 +69,7 @@ func Home() templ.Component {
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, "</div><!-- Stats Section --><div class=\"bg-white rounded-lg shadow-md p-6\"><h2 class=\"text-2xl font-bold mb-4 text-gray-800\">Recent Activity</h2><div hx-get=\"/articles\" hx-trigger=\"load\" hx-target=\"#articles-preview\" class=\"min-h-[200px]\">")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, "</div><!-- Stats Section --><div class=\"bg-white rounded-lg shadow-md p-6\"><h2 class=\"text-2xl font-bold mb-4 text-gray-800\">Recent Activity</h2><div hx-get=\"/api/articles/recent\" hx-trigger=\"load\" hx-target=\"#articles-preview\" class=\"min-h-[200px]\">")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -77,7 +77,7 @@ func Home() templ.Component {
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 3, "</div></div><div id=\"articles-preview\"></div></div>")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 3, "</div><div id=\"articles-preview\"></div></div></div>")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
