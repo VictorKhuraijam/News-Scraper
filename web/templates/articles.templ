@@ -37,12 +37,12 @@ templ Articles(articles []models.Article) {
                         <h1 class="text-3xl font-bold text-gray-800">Latest Articles</h1>
                         <p class="text-gray-600 mt-1">{fmt.Sprintf("%d", len(articles))} articles found</p>
                     </div>
-                    <button
-                        hx-get="/api/articles"
-                        hx-target="#articles-content"
-                        class="bg-gray-200 hover:bg-gray-300 text-gray-700 px-4 py-2 rounded-md">
-                        Refresh
-                    </button>
+                    // <button
+                    //     hx-get="/api/articles"
+                    //     hx-target="#articles-content"
+                    //     class="bg-gray-200 hover:bg-gray-300 text-gray-700 px-4 py-2 rounded-md">
+                    //     Refresh
+                    // </button>
                 </div>
 
                 @ArticlesList(articles)
@@ -50,7 +50,7 @@ templ Articles(articles []models.Article) {
         </div>
     }
 
-    
+
 }
 
 templ ArticlesContent(articles []models.Article, category string) {
@@ -66,12 +66,12 @@ templ ArticlesContent(articles []models.Article, category string) {
                 </h1>
                 <p class="text-gray-600 mt-1">{fmt.Sprintf("%d", len(articles))} articles found</p>
             </div>
-            <button
-                hx-get="/api/articles"
-                hx-target="#articles-list"
-                class="bg-gray-200 hover:bg-gray-300 text-gray-700 px-4 py-2 rounded-md">
-                Refresh
-            </button>
+            // <button
+            //     hx-get="/api/articles"
+            //     hx-target="#articles-list"
+            //     class="bg-gray-200 hover:bg-gray-300 text-gray-700 px-4 py-2 rounded-md">
+            //     Refresh
+            // </button>
         </div>
 
         @ArticlesList(articles)

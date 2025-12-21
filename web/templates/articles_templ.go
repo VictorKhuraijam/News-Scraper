@@ -114,7 +114,7 @@ func Articles(articles []models.Article) templ.Component {
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 7, " articles found</p></div><button hx-get=\"/api/articles\" hx-target=\"#articles-content\" class=\"bg-gray-200 hover:bg-gray-300 text-gray-700 px-4 py-2 rounded-md\">Refresh</button></div>")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 7, " articles found</p></div></div>")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -194,7 +194,7 @@ func ArticlesContent(articles []models.Article, category string) templ.Component
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 13, " articles found</p></div><button hx-get=\"/api/articles\" hx-target=\"#articles-list\" class=\"bg-gray-200 hover:bg-gray-300 text-gray-700 px-4 py-2 rounded-md\">Refresh</button></div>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 13, " articles found</p></div></div>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
