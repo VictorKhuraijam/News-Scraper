@@ -4,6 +4,7 @@ import (
 	"context"
 	"database/sql"
 	"fmt"
+	"log"
 
 	// "fmt"
 	"news-scraper/internal/models"
@@ -175,4 +176,21 @@ func (r *Repository) GetSourceByID(ctx context.Context, id int) (*models.Source,
     }
 
     return &s, nil
+}
+
+//Deletes all articles from the database
+func (r *Repository) ClearAllArticles( ctx context.Context) error {
+    query := `DELETE FROM articles WHERE scraped_at < NOW() - INTERVAL 24 HOUR`
+
+    result, err := r.db.ExecContext(ctx, query)
+    if err != nil {
+        return err
+    }
+
+    rowsAffected, err := result.RowsAffected()
+    if err != nil {
+        return err
+    }
+    log.Printf("Deleted %d aricles from database", rowsAffected)
+    return nil
 }

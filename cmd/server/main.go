@@ -95,7 +95,7 @@ func main() {
     })
 
     // Initialize scheduler
-    sched := scheduler.NewScheduler(scraperInstance)
+    sched := scheduler.NewScheduler(scraperInstance, repo)
     if err := sched.Start(cfg.Scraper.Schedule); err != nil {
         log.Printf("Warning: Failed to start scheduler: %v", err)
     }
