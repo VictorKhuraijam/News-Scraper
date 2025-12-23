@@ -37,8 +37,8 @@ func (s *Scheduler) Start(schedule string) error {
         return err
     }
 
-    //runs every 1 hour
-    _, err =s.cron.AddFunc("* */2 * * *", func ()  {
+    //runs every 2 hour
+    _, err =s.cron.AddFunc("0 */2 * * *", func ()  {
         log.Println("Starting scheduled article cleanup...")
         ctx:= context.Background()
         if err := s.clearArticles(ctx); err != nil {

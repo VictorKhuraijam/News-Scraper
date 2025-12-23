@@ -50,6 +50,10 @@ func (h *ArticlesHandler) GetRecentActivity(c *fiber.Ctx) error {
         return templates.ErrorMessage("Failed to fetch articles").Render(c.Context(), c.Request().BodyWriter())
     }
 
+    if len(articles) == 0 {
+        return c.SendStatus(fiber.StatusNoContent)
+    }
+
     // return c.JSON(articles)
     c.Set("Content-Type", "text/html")
     return templates.ArticlesList(articles).Render(c.Context(), c.Response().BodyWriter())

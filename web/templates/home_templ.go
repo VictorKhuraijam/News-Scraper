@@ -49,11 +49,7 @@ func Home() templ.Component {
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = FeatureCard("Rate Limiting", "Respects website limits with token bucket algorithm", "🚦").Render(ctx, templ_7745c5c3_Buffer)
-			if templ_7745c5c3_Err != nil {
-				return templ_7745c5c3_Err
-			}
-			templ_7745c5c3_Err = FeatureCard("Auto Scheduling", "Periodic scraping with cron scheduler", "⏰").Render(ctx, templ_7745c5c3_Buffer)
+			templ_7745c5c3_Err = FeatureCard("Colly", "Uses colly for web scraping", "🚦").Render(ctx, templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -69,7 +65,7 @@ func Home() templ.Component {
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, "</div><!-- Stats Section --><div class=\"bg-white rounded-lg shadow-md p-6\"><h2 class=\"text-2xl font-bold mb-4 text-gray-800\">Recent Activity</h2><div hx-get=\"/api/articles/recent\" hx-trigger=\"load\" hx-target=\"#articles-preview\" class=\"min-h-[200px]\">")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, "</div><!-- Stats Section --><div class=\"bg-white rounded-lg shadow-md p-6\"><h2 class=\"text-2xl font-bold mb-4 text-gray-800\">Recent Activity</h2><div id=\"articles-preview\" hx-get=\"/api/articles/recent\" hx-trigger=\"load\" hx-swap=\"innerHTML\" class=\"min-h-[200px]\">")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -77,7 +73,7 @@ func Home() templ.Component {
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 3, "</div><div id=\"articles-preview\"></div></div></div>")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 3, "</div></div></div>")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}

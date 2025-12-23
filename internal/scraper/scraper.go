@@ -228,10 +228,19 @@ func (s *Scraper) scrapeSourceWithColly(ctx context.Context, source models.Sourc
 
     // Save articles to database
     for _, article := range articles {
-        if err := s.repo.SaveArticle(ctx, &article); err != nil {
+
+        dbArticle := &models.Article{
+            SourceID:   source.ID,
+            SourceName: source.Name,
+            Title:      article.Title,
+            URL:        article.URL,
+            Summary:    article.Summary,
+        }
+        if err := s.repo.SaveArticle(ctx, dbArticle); err != nil {
             log.Printf("Failed to save article: %v", err)
         }
     }
+    // fmt.Printf("Scraped articles is %v", articles)
 
     return nil
 }

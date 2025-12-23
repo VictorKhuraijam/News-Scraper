@@ -42,8 +42,9 @@ templ Home() {
             <!-- Features Grid -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
                 @FeatureCard("Concurrent Scraping", "Uses Go's goroutines for parallel processing", "⚡")
-                @FeatureCard("Rate Limiting", "Respects website limits with token bucket algorithm", "🚦")
-                @FeatureCard("Auto Scheduling", "Periodic scraping with cron scheduler", "⏰")
+                @FeatureCard("Colly", "Uses colly for web scraping", "🚦")
+                // @FeatureCard("Rate Limiting", "Respects website limits with token bucket algorithm", "🚦")
+                // @FeatureCard("Auto Scheduling", "Periodic scraping with cron scheduler", "⏰")
                 @FeatureCard("Multiple Sources", "Aggregate from various news websites", "🌐")
                 @FeatureCard("Real-time Updates", "HTMX for dynamic content loading", "🔄")
                 @FeatureCard("MySQL Storage", "Persistent storage with proper indexing", "💾")
@@ -53,15 +54,16 @@ templ Home() {
             <div class="bg-white rounded-lg shadow-md p-6">
                 <h2 class="text-2xl font-bold mb-4 text-gray-800">Recent Activity</h2>
                 <div
+                    id="articles-preview"
                     hx-get="/api/articles/recent"
                     hx-trigger="load"
-                    hx-target="#articles-preview"
+                    hx-swap="innerHTML"
                     class="min-h-[200px]">
                     @LoadingSpinner()
                 </div>
-                <div id="articles-preview"></div>
-                </div>
+
             </div>
+        </div>
 
     }
 }
