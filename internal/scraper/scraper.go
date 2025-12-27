@@ -235,6 +235,7 @@ func (s *Scraper) scrapeSourceWithColly(ctx context.Context, source models.Sourc
             Title:      article.Title,
             URL:        article.URL,
             Summary:    article.Summary,
+            Category:   article.Category,
         }
         if err := s.repo.SaveArticle(ctx, dbArticle); err != nil {
             log.Printf("Failed to save article: %v", err)

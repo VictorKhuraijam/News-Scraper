@@ -83,7 +83,7 @@ func (h *ArticlesHandler) GetBySource(c *fiber.Ctx) error {
 
     // return c.JSON(articles)
     c.Set("Content-Type", "text/html")
-    return templates.Articles(articles).Render(c.Context(), c.Response().BodyWriter())
+    return templates.ArticlesContent(articles, "all").Render(c.Context(), c.Response().BodyWriter())
 }
 
 

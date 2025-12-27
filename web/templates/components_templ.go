@@ -196,7 +196,7 @@ func ErrorMessage(message string) templ.Component {
 }
 
 // Helper function
-func formatTime(t time.Time) string {
+func FormatTime(t time.Time) string {
 	now := time.Now()
 	diff := now.Sub(t)
 
